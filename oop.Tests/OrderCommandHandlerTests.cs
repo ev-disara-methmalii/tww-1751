@@ -32,21 +32,15 @@ using OOP.Api.Commands;
 using OOP.Api.Handlers;
 using oop.Api.Models;
 using oop.Api.Repositories;
-using OOP.Api.Commands;
-using OOP.Api.Handlers;
 
 namespace oop.Tests.Unit;
 
 public class OrderCommandHandlerTests
 {
-    // =======================================================
-    // TESTS FOR: CreateOrderCommandHandler
-    // =======================================================
 
     [Fact]
     public async Task CreateOrder_ValidCommand_CallsAddAndSave()
     {
-        // ARRANGE: create a fake repository
         var mockRepo = new Mock<IOrderRepository>();
         var handler = new CreateOrderCommandHandler(mockRepo.Object);
 
@@ -55,27 +49,24 @@ public class OrderCommandHandlerTests
             new List<OrderItemDto> { new("Laptop", 1, 150000m) }
         );
 
-        // ACT: run the handler
+        // ACT
         await handler.Handle(command, CancellationToken.None);
 
-        // ASSERT: verify AddAsync was called once
+        // ASSERT
         mockRepo.Verify(r => r.AddAsync(
             It.IsAny<Order>(),
             It.IsAny<CancellationToken>()), Times.Once);
 
-        // ASSERT: verify SaveChangesAsync was called once
+        // ASSERT
         mockRepo.Verify(r => r.SaveChangesAsync(
             It.IsAny<CancellationToken>()), Times.Once);
     }
 
-    // =======================================================
-    // TESTS FOR: ConfirmOrderCommandHandler
-    // =======================================================
 
     [Fact]
     public async Task ConfirmOrder_ExistingOrder_ReturnsTrue()
     {
-        // ARRANGE: set up fake repository to return an order
+        // ARRANGE
         var order = new Order { CustomerName = "Dissara" };
         var mockRepo = new Mock<IOrderRepository>();
         mockRepo.Setup(r => r.GetByIdAsync(1, It.IsAny<CancellationToken>()))
@@ -83,11 +74,11 @@ public class OrderCommandHandlerTests
 
         var handler = new ConfirmOrderCommandHandler(mockRepo.Object);
 
-        // ACT: run the handler
+        // ACT
         var result = await handler.Handle(
             new ConfirmOrderCommand(1), CancellationToken.None);
 
-        // ASSERT: should return true and order should be Confirmed
+        // ASSERT
         result.Should().BeTrue();
         order.Status.Should().Be(OrderStatus.Confirmed);
     }
@@ -95,41 +86,38 @@ public class OrderCommandHandlerTests
     [Fact]
     public async Task ConfirmOrder_NonExistingOrder_ReturnsFalse()
     {
-        // ARRANGE: set up fake repository to return null (order not found)
+        // ARRANGE
         var mockRepo = new Mock<IOrderRepository>();
         mockRepo.Setup(r => r.GetByIdAsync(99, It.IsAny<CancellationToken>()))
                 .ReturnsAsync((Order?)null);
 
         var handler = new ConfirmOrderCommandHandler(mockRepo.Object);
 
-        // ACT: run the handler with an order Id that does not exist
+        // ACT
         var result = await handler.Handle(
             new ConfirmOrderCommand(99), CancellationToken.None);
 
-        // ASSERT: should return false because order was not found
+        // ASSERT
         result.Should().BeFalse();
     }
 
-    // =======================================================
-    // TESTS FOR: CancelOrderCommandHandler
-    // =======================================================
 
     [Fact]
     public async Task CancelOrder_ExistingPendingOrder_ReturnsTrue()
     {
-        // ARRANGE: set up fake repository to return an order
-        var order = new Order { CustomerName = "Dissara" };
+        // ARRANGE
+        var order = new Order { CustomerName = "Disara" };
         var mockRepo = new Mock<IOrderRepository>();
         mockRepo.Setup(r => r.GetByIdAsync(1, It.IsAny<CancellationToken>()))
                 .ReturnsAsync(order);
 
         var handler = new CancelOrderCommandHandler(mockRepo.Object);
 
-        // ACT: run the handler
+        // ACT
         var result = await handler.Handle(
             new CancelOrderCommand(1), CancellationToken.None);
 
-        // ASSERT: should return true and order should be Cancelled
+        // ASSERT
         result.Should().BeTrue();
         order.Status.Should().Be(OrderStatus.Cancelled);
     }

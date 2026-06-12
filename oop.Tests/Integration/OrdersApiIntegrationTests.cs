@@ -27,7 +27,6 @@ public class OrdersApiIntegrationTests : IClassFixture<WebApplicationFactory<Pro
         _client = factory
             .WithWebHostBuilder(builder =>
             {
-                // Set environment to Test — stops Swagger middleware from loading
                 builder.UseEnvironment("Test");
 
                 builder.ConfigureServices(services =>
@@ -45,7 +44,6 @@ public class OrdersApiIntegrationTests : IClassFixture<WebApplicationFactory<Pro
             .CreateClient();
     }
 
-    // ── helper: creates an order and returns its Id ───────────
     private async Task<int> CreateTestOrderAsync(string customerName = "Dissara")
     {
         var request = new
@@ -67,7 +65,6 @@ public class OrdersApiIntegrationTests : IClassFixture<WebApplicationFactory<Pro
         return created.GetProperty("id").GetInt32();
     }
 
-    // ── helper: fetches an order by Id ────────────────────────
     private async Task<OrderResponse> GetOrderAsync(int id)
     {
         var response = await _client.GetAsync($"/api/orders/{id}");
@@ -79,7 +76,6 @@ public class OrdersApiIntegrationTests : IClassFixture<WebApplicationFactory<Pro
         return JsonSerializer.Deserialize<OrderResponse>(body, _jsonOptions)!;
     }
 
-    // ── TEST 1 ────────────────────────────────────────────────
     [Fact]
     public async Task GetAllOrders_EmptyDatabase_ReturnsEmptyList()
     {
@@ -92,7 +88,6 @@ public class OrdersApiIntegrationTests : IClassFixture<WebApplicationFactory<Pro
         orders.Should().BeEmpty();
     }
 
-    // ── TEST 2 ────────────────────────────────────────────────
     [Fact]
     public async Task CreateOrder_ValidRequest_Returns201Created()
     {
@@ -112,7 +107,6 @@ public class OrdersApiIntegrationTests : IClassFixture<WebApplicationFactory<Pro
 
 
 
-    // ── TEST 4 ────────────────────────────────────────────────
     [Fact]
     public async Task GetOrderById_NotFound_Returns404()
     {

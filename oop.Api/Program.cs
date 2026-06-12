@@ -13,7 +13,6 @@ builder.Services.AddMediatR(cfg =>
 
 builder.Services.AddControllers();
 
-// Only add Swagger in Development — not in Test environment
 if (builder.Environment.IsDevelopment())
 {
     builder.Services.AddEndpointsApiExplorer();
@@ -22,7 +21,6 @@ if (builder.Environment.IsDevelopment())
 
 var app = builder.Build();
 
-// Only use Swagger in Development — not in Test environment
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();

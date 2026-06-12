@@ -17,7 +17,6 @@ public class AppDbContext : DbContext
             .WithOne()
             .OnDelete(DeleteBehavior.Cascade);
 
-        // tell EF Core to ignore the computed property — not a real column
         modelBuilder.Entity<Order>()
             .Ignore(o => o.TotalAmount);
 

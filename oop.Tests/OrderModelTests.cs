@@ -1,40 +1,11 @@
-﻿// =======================================================
-// FILE: OrderModelTests.cs
-// =======================================================
-// PURPOSE:
-// These are UNIT TESTS for the Order model.
-// They test the business rules inside Order.cs directly.
-//
-// WHAT IS A UNIT TEST?
-//    A unit test checks ONE small piece of logic in isolation.
-//    No database. No HTTP. No external services.
-//    Just the class being tested.
-//
-// PATTERN USED: ARRANGE / ACT / ASSERT (AAA)
-//    ARRANGE = set up the data needed for the test
-//    ACT     = call the method being tested
-//    ASSERT  = check the result is what we expected
-//
-// WHY TEST THE ORDER MODEL?
-//    Order.cs has business rules:
-//      - Quantity must be > 0
-//      - Cannot confirm an already confirmed order
-//      - Cannot cancel a shipped order
-//    These rules must ALWAYS work correctly.
-//    Tests prove they work and alert us if they break later.
-// =======================================================
-
-using oop.Api.Models;
+﻿using oop.Api.Models;
 using FluentAssertions;
 
 namespace oop.Tests.Unit;
 
 public class OrderModelTests
 {
-    // =======================================================
-    // TESTS FOR: AddItem()
-    // =======================================================
-
+  
     [Fact]
     public void AddItem_ValidItem_AddsToItemsList()
     {
@@ -79,10 +50,6 @@ public class OrderModelTests
         total.Should().Be(155000m);
     }
 
-    // =======================================================
-    // TESTS FOR: Confirm()
-    // =======================================================
-
     [Fact]
     public void Confirm_PendingOrder_ChangesStatusToConfirmed()
     {
@@ -111,9 +78,6 @@ public class OrderModelTests
            .WithMessage("*Only pending orders can be confirmed*");
     }
 
-    // =======================================================
-    // TESTS FOR: Cancel()
-    // =======================================================
 
     [Fact]
     public void Cancel_PendingOrder_ChangesStatusToCancelled()

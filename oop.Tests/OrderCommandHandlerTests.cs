@@ -41,7 +41,7 @@ public class OrderCommandHandlerTests
     public async Task ConfirmOrder_ExistingOrder_ReturnsTrue()
     {
         // ARRANGE
-        var order = new Order { CustomerName = "Dissara" };
+        var order = new Order { CustomerName = "Disara" };
         var mockRepo = new Mock<IOrderRepository>();
         mockRepo.Setup(r => r.GetByIdAsync(1, It.IsAny<CancellationToken>()))
                 .ReturnsAsync(order);

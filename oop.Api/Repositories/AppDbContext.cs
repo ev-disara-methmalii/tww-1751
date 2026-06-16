@@ -3,14 +3,14 @@ using Microsoft.EntityFrameworkCore;
 
 namespace oop.Api.Repositories;
 
-public class AppDbContext : DbContext
+public class AppDbContext : DbContext  // Inheritance
 {
     public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) { }
 
     public DbSet<Order> Orders => Set<Order>();
     public DbSet<OrderItem> OrderItems => Set<OrderItem>();
 
-    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    protected override void OnModelCreating(ModelBuilder modelBuilder)  //Polymorphism
     {
         modelBuilder.Entity<Order>()
             .HasMany(o => o.Items)

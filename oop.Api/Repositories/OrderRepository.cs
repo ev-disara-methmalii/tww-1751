@@ -3,9 +3,11 @@ using Microsoft.EntityFrameworkCore;
 
 namespace oop.Api.Repositories;
 
+
+//Abstraction
 public class OrderRepository : IOrderRepository
 {
-    private readonly AppDbContext _db;
+    private readonly AppDbContext _db;   //Encapsulation
 
     public OrderRepository(AppDbContext db) => _db = db;
 

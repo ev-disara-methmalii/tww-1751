@@ -1,34 +1,8 @@
-﻿// =======================================================
-// FILE: OrderCommandHandlerTests.cs
-// =======================================================
-// PURPOSE:
-// These are UNIT TESTS for the command handlers.
-// They test the handler logic in complete isolation.
-//
-// WHAT IS MOCKING?
-//    Handlers depend on IOrderRepository.
-//    In unit tests we do NOT want to use a real database.
-//    So we create a FAKE (mock) repository using Moq.
-//
-//    A mock lets us:
-//    - Control what the fake repository returns
-//    - Verify which methods were called
-//    - Test handler logic without any database
-//
-// HOW MOQ WORKS:
-//    var mockRepo = new Mock<IOrderRepository>();
-//    This creates a fake IOrderRepository.
-//
-//    mockRepo.Setup(r => r.GetByIdAsync(1, ...)).ReturnsAsync(order);
-//    This says: "when GetByIdAsync(1) is called, return this order"
-//
-//    mockRepo.Verify(r => r.AddAsync(...), Times.Once);
-//    This checks: "was AddAsync called exactly once?"
-// =======================================================
+﻿
 
 using FluentAssertions;
 using Moq;
-using OOP.Api.Commands;
+using oop.Api.Commands;
 using OOP.Api.Handlers;
 using oop.Api.Models;
 using oop.Api.Repositories;

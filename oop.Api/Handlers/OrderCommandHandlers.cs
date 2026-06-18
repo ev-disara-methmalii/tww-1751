@@ -3,7 +3,7 @@ using oop.Api.Models;
 using oop.Api.Repositories;
 using MediatR;
 
-namespace OOP.Api.Handlers;
+namespace oop.Api.Handlers;
 //OPEN/CLOSED PRINCIPLE(OCP)
 // MEDIATOR PATTERN: Each handler has ONE job (SRP).
 

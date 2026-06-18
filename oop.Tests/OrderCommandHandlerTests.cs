@@ -19,7 +19,7 @@ public class OrderCommandHandlerTests
         var handler = new CreateOrderCommandHandler(mockRepo.Object);
 
         var command = new CreateOrderCommand(
-            "Dissara",
+            "Disara",
             new List<OrderItemDto> { new("Laptop", 1, 150000m) }
         );
 

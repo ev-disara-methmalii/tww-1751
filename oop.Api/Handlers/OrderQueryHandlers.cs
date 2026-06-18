@@ -1,4 +1,3 @@
-using OOP.Api.Models;
 using oop.Api.Queries;
 using oop.Api.Repositories;
 using MediatR;

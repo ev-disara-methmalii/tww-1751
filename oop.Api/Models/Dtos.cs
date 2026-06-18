@@ -1,4 +1,4 @@
-namespace OOP.Api.Models;
+namespace oop.Api.Models;
 
 // Request DTOs
 public record CreateOrderRequest(

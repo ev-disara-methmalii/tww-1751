@@ -5,11 +5,9 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using oop.Api.Models;
 using oop.Api.Repositories;
-using OOP.Api.Models;
 using System.Net;
 using System.Net.Http.Json;
 using System.Text.Json;
-using Xunit;
 
 namespace oop.Tests.Integration;
 
@@ -44,37 +42,6 @@ public class OrdersApiIntegrationTests : IClassFixture<WebApplicationFactory<Pro
             .CreateClient();
     }
 
-    private async Task<int> CreateTestOrderAsync(string customerName = "Dissara")
-    {
-        var request = new
-        {
-            customerName,
-            items = new[]
-            {
-                new { productName = "Laptop", quantity = 1, unitPrice = 150000.00 }
-            }
-        };
-
-        var response = await _client.PostAsJsonAsync("/api/orders", request);
-        var body = await response.Content.ReadAsStringAsync();
-
-        response.StatusCode.Should().Be(HttpStatusCode.Created,
-            $"Create order failed. Body: {body}");
-
-        var created = JsonSerializer.Deserialize<JsonElement>(body, _jsonOptions);
-        return created.GetProperty("id").GetInt32();
-    }
-
-    private async Task<OrderResponse> GetOrderAsync(int id)
-    {
-        var response = await _client.GetAsync($"/api/orders/{id}");
-        var body = await response.Content.ReadAsStringAsync();
-
-        response.StatusCode.Should().Be(HttpStatusCode.OK,
-            $"Get order failed. Body: {body}");
-
-        return JsonSerializer.Deserialize<OrderResponse>(body, _jsonOptions)!;
-    }
 
     [Fact]
     public async Task GetAllOrders_EmptyDatabase_ReturnsEmptyList()

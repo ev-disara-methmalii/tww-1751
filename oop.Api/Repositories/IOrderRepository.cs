@@ -3,10 +3,6 @@
 
 // SOLID 5: DEPENDENCY INVERSION PRINCIPLE (DIP)
 
-
-
-
-
 using oop.Api.Models;
 
 namespace oop.Api.Repositories;

@@ -2,7 +2,7 @@ using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using oop.Api.Commands;
 using oop.Api.Queries;
-using OOP.Api.Models;
+using oop.Api.Models;
 
 namespace oop.Api.Controllers;
 //Mediator Pattern

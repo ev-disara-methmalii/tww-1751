@@ -1,7 +1,6 @@
 ﻿using MediatR;
 using oop.Api.Models;
 using oop.Api.Repositories;
-using OOP.Api.Models;
 
 namespace oop.Api.Queries;
 

@@ -10,7 +10,7 @@ public class OrderModelTests
     public void AddItem_ValidItem_AddsToItemsList()
     {
         // ARRANGE: create a new order
-        var order = new Order { CustomerName = "Dissara" };
+        var order = new Order { CustomerName = "Disara" };
 
         // ACT: add one item
         order.AddItem("Laptop", 1, 150000m);
@@ -25,7 +25,7 @@ public class OrderModelTests
     public void AddItem_ZeroQuantity_ThrowsArgumentException()
     {
         // ARRANGE: create a new order
-        var order = new Order { CustomerName = "Dissara" };
+        var order = new Order { CustomerName = "Disara" };
 
         // ACT: try to add an item with quantity 0
         var act = () => order.AddItem("Laptop", 0, 150000m);
@@ -39,7 +39,7 @@ public class OrderModelTests
     public void TotalAmount_MultipleItems_ReturnsSumOfAllItemTotals()
     {
         // ARRANGE: create order with two items
-        var order = new Order { CustomerName = "Dissara" };
+        var order = new Order { CustomerName = "Disara" };
         order.AddItem("Laptop", 1, 150000m);
         order.AddItem("Mouse", 2, 2500m);
 
@@ -54,7 +54,7 @@ public class OrderModelTests
     public void Confirm_PendingOrder_ChangesStatusToConfirmed()
     {
         // ARRANGE: new order starts as Pending
-        var order = new Order { CustomerName = "Dissara" };
+        var order = new Order { CustomerName = "Disara" };
 
         // ACT: confirm the order
         order.Confirm();
@@ -67,7 +67,7 @@ public class OrderModelTests
     public void Confirm_AlreadyConfirmedOrder_ThrowsInvalidOperationException()
     {
         // ARRANGE: confirm the order once first
-        var order = new Order { CustomerName = "Dissara" };
+        var order = new Order { CustomerName = "Disara" };
         order.Confirm();
 
         // ACT: try to confirm again
@@ -83,7 +83,7 @@ public class OrderModelTests
     public void Cancel_PendingOrder_ChangesStatusToCancelled()
     {
         // ARRANGE: new order starts as Pending
-        var order = new Order { CustomerName = "Dissara" };
+        var order = new Order { CustomerName = "Disara" };
 
         // ACT: cancel the order
         order.Cancel();
